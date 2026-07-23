@@ -45,7 +45,6 @@ credit-risk-explainable-ml/
 ├── Phase1_Data_Cleaning/
 │   ├── README.md                      ← Phase 1 documentation
 │   ├── Data_cleaning.ipynb            ← Main cleaning notebook
-│   ├── data_cleaning_report.tex       ← LaTeX source of cleaning report
 │   └── Data_cleaning_report.pdf       ← Compiled PDF report
 │
 ├── Phase2_EDA/
