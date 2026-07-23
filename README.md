@@ -1,6 +1,5 @@
 # Explainable Credit Risk Model using Machine Learning in Corporate Banking
 
-**Team:** Riya Das & Souvik Nag
 **Dataset:** Lending Club Loan Dataset — 2007 to 2014
 **Domain:** Financial Risk Analytics | Credit Default Prediction
 
