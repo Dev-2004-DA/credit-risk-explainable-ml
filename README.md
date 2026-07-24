@@ -56,7 +56,7 @@ credit-risk-explainable-ml/
 ├── Phase3_Modelling/
 │   ├── README.md                      ← Phase 3 documentation
 │   ├── modelling_preprocessing.ipynb  ← Feature selection and engineering
-│   └── modelling_2.ipynb              ← Model training and tuning
+│   └── modelling_training.ipynb       ← Model training and tuning
 │
 ├── Phase4_Model_Evaluation/
 │   ├── README.md                      ← Phase 4 documentation
