@@ -197,7 +197,7 @@ local `Datasets/` folder (not tracked by git).
 Phase1_Data_Cleaning/Data_cleaning.ipynb
 Phase2_EDA/eda.ipynb
 Phase3_Modelling/modelling_preprocessing.ipynb
-Phase3_Modelling/modelling_2.ipynb
+Phase3_Modelling/modelling_training.ipynb
 Phase4_Model_Evaluation/final_model_evaluation.ipynb
 Phase5_Explainability/xai_shap.ipynb
 ```
