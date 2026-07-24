@@ -12,7 +12,7 @@ missing a real defaulter costs the bank far more than a false alarm.
 | Notebook | Purpose |
 |---|---|
 | `modelling_preprocessing.ipynb` | Feature selection, engineering, binning, encoding |
-| `modelling_2.ipynb` | Model training and hyperparameter tuning |
+| `modelling_training.ipynb` | Model training and hyperparameter tuning |
 
 ---
 
