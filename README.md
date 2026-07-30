@@ -1,37 +1,26 @@
-# Explainable Credit Risk Model using Machine Learning in Corporate Banking
-
-**Dataset:** Lending Club Loan Dataset — 2007 to 2014
-**Domain:** Financial Risk Analytics | Credit Default Prediction
+> **Predicting loan default on 230,288 Lending Club loans (2007–2014) using four ML models across three paradigms, with SHAP-based explainability for regulatory compliance.**
 
 ---
 
-## Project Overview
+## Project Summary
 
-This project builds a complete, production-oriented credit risk framework
-for corporate banking using the Lending Club loan dataset (2007–2014).
-It addresses two interconnected objectives:
-
-| Objective | Question | Method |
-|---|---|---|
-| Classification | Who will default? | LR, XGBoost, RF, GBM |
-| Explainability | Why did the model decide this? | SHAP |
+Banks face an asymmetric cost problem in credit risk — missing a real defaulter costs the entire loan principal, while incorrectly rejecting a good borrower costs one customer. Standard ML optimises for accuracy, which is misleading on imbalanced data (81% non-defaulter). This project builds a complete, production-oriented credit risk framework that prioritises **Recall** as the primary metric, evaluated across five complementary dimensions, and explained using SHAP for individual borrower-level audit trails.
 
 ---
 
-## Dataset
+## Final Results
 
-| Property | Value |
-|---|---|
-| Source | Lending Club public loan data |
-| Period | 2007 – 2014 |
-| Raw records | 466,285 loans × 75 features |
-| After cleaning | 230,288 resolved loans × 49 features |
-| Target variable | `loan_status` — Defaulter (19%) vs Not Defaulter (81%) |
-| Class imbalance | 81% Not Defaulter, 19% Defaulter |
+| Model | Recall | Precision | Accuracy | F1 | ROC-AUC | Brier |
+|---|---|---|---|---|---|---|
+| Logistic Regression | 71.83% | 28.21% | 59.99% | 0.412 | **70.06%** | 0.2397 |
+| XGBoost | 71.15% | 27.77% | 59.43% | 0.407 | 69.60% | 0.2356 |
+| RF Full (20 feat) | 69.57% | 27.03% | 58.61% | 0.398 | 68.64% | 0.2380 |
+| RF Reduced (14 feat) | 72.32% | 26.44% | 56.59% | 0.398 | 68.47% | 0.2386 |
+| **Gradient Boosting** | 65.97% | **29.04%** | **62.98%** | 0.407 | 69.61% | **0.2212** |
 
-**Note:** Raw dataset and intermediate CSVs are not included in this
-repository due to file size. Download the raw data from
-[Kaggle — Lending Club Loan Data](https://www.kaggle.com/datasets/wordsforthewise/lending-club).
+**Final models selected:**
+- **Gradient Boosting** — primary deployment model (best calibration, Brier 0.2212, ranked 1st in McNemar's test)
+- **Logistic Regression** — interpretability model (highest F1 0.412, ROC-AUC 70.06%, regulatory audit ready)
 
 ---
 
@@ -39,124 +28,133 @@ repository due to file size. Download the raw data from
 
 ```
 credit-risk-explainable-ml/
-│
-├── README.md                          ← You are here
-│
+├── README.md
 ├── Phase1_Data_Cleaning/
-│   ├── README.md                      ← Phase 1 documentation
-│   ├── Data_cleaning.ipynb            ← Main cleaning notebook
-│   └── Data_cleaning_report.pdf       ← Compiled PDF report
-│
+│   ├── README.md
+│   ├── Data_cleaning.ipynb
+│   ├── data_cleaning_report.tex
+│   └── Data_cleaning_report.pdf
 ├── Phase2_EDA/
-│   ├── README.md                      ← Phase 2 documentation
-│   ├── eda.ipynb                      ← EDA notebook
-│   ├── EDA_Report.pdf                 ← EDA report PDF
-│   └── EDA_Report_With_Visuals.docx   ← Word report with embedded plots
-│
+│   ├── README.md
+│   ├── eda.ipynb
+│   ├── EDA_Report.pdf
+│   └── EDA_Report_With_Visuals.docx
 ├── Phase3_Modelling/
-│   ├── README.md                      ← Phase 3 documentation
-│   ├── modelling_preprocessing.ipynb  ← Feature selection and engineering
-│   └── modelling_training.ipynb       ← Model training and tuning
-│
+│   ├── README.md
+│   ├── modelling_preprocessing.ipynb
+│   └── modelling_2.ipynb
 ├── Phase4_Model_Evaluation/
-│   ├── README.md                      ← Phase 4 documentation
-│   ├── final_model_evaluation.ipynb   ← Comprehensive evaluation notebook
+│   ├── README.md
+│   ├── final_model_evaluation.ipynb
 │   └── final_testing_on_unlabelled_data/
-│       └── Testing_data_created.ipynb ← Agreement analysis on active loans
-│
+│       └── Testing_data_created.ipynb
 ├── Phase5_Explainability/
-│   ├── README.md                      ← Phase 5 documentation
-│   └── xai_shap.ipynb                 ← SHAP analysis (in progress)
-│
+│   ├── README.md
+│   └── shap_analysis.ipynb
 ├── .gitignore
 └── requirements.txt
 ```
 
 ---
 
-## Pipeline Summary
+## Pipeline
 
 ```
-Raw Data (466K rows × 75 features)
-        │
-        ▼
-Phase 1 — Data Cleaning
-  • Dropped 18 irrelevant/null columns
-  • Treated missing values in 20 columns
-  • Verified accounting identity
-  • Output: 466,285 rows × 57 features
-        │
-        ▼
-Phase 2 — EDA
-  • Analysed all features vs default rate
-  • Ranked predictive strength
-  • Identified key patterns and data quality issues
-        │
-        ▼
-Phase 3 — Modelling
-  • Statistical feature selection (Chi-Square, Mann-Whitney)
-  • Feature engineering (binning, binary flags, purpose grouping)
-  • 4 models trained: LR, XGBoost, RF, GBM
-  • Optimised on Recall — catching defaulters is the priority
-  • Output: 5 trained model files
-        │
-        ▼
-Phase 4 — Model Evaluation
-  • Standard metrics, calibration, threshold optimization
-  • Agreement analysis on 235K active loans
-  • McNemar's significance testing
-  • Final model: Gradient Boosting (Brier 0.2212)
-        │
-        ▼
-Phase 5 — Explainability (XAI)
-  • SHAP global and local explanations on GBM
-  • Feature interaction analysis
-  • Regulatory-ready prediction explanations
+Raw Data (466,285 rows x 75 features)
+         |
+Phase 1 - Data Cleaning
+  - Dropped 18 null/irrelevant columns
+  - Treated missing values in 20 columns
+  - Output: 230,288 resolved loans x 55 features
+         |
+Phase 2 - Exploratory Data Analysis
+  - Ranked all features by default rate
+  - grade/sub_grade strongest (6.5% to 43.7%)
+  - revol_bal and emp_length confirmed useless
+         |
+Phase 3 - Modelling
+  - Chi-Square + Mann-Whitney + Anderson-Darling feature selection
+  - Binned 4 continuous variables
+  - No SMOTE - class weights only
+  - 4 models: LR, XGBoost, RF, GBM
+         |
+Phase 4 - Model Evaluation
+  - 6 dimensions: metrics, importance, ROC, agreement on
+    235,399 active loans, calibration, McNemars test
+  - Final ranking: GBM > LR > XGBoost > RF Full > RF Reduced
+         |
+Phase 5 - Explainability
+  - SHAP on GBM (TreeExplainer) and LR (LinearExplainer)
+  - 15 plots: bar, beeswarm, waterfall, dependence, comparison
+  - All EDA findings confirmed - no contradictions
 ```
 
 ---
 
-## Future Work
+## Key Findings
 
-- **Survival Analysis** — Kaplan-Meier and Cox Proportional Hazards
-  to answer *when* a borrower is likely to default within the loan
-  lifecycle (months 5–10 identified as the danger zone in EDA)
-- **Macro Stress Testing** — Monte Carlo simulation under normal vs
-  stressed economic conditions using the 2008 crisis as calibration
+**sub_grade is the single dominant predictor**
+Grade A defaults at 6.5%, Grade G at 43.7% — a 7x gap, perfectly monotonic across all 35 sub-grades. Confirmed by EDA, feature importance, and SHAP.
+
+**All five models converge to the same ceiling**
+70-72% recall and 68-70% AUC. The ceiling is in the data signal, not the algorithms.
+
+**Revolving balance has zero predictive power**
+Identical distributions for both groups. Revolving utilization shows 3x increase from low to high — same raw data, completely different information.
+
+**Calibration separates GBM from LR**
+GBM Brier 0.2212 vs LR 0.2397. When GBM predicts 70% default probability, reality is closer to 70% than any other model.
+
+**Two-model approach justified**
+Deployment needs calibrated probabilities (GBM). Regulatory compliance needs transparent explanations (LR).
 
 ---
 
-## Key Results
+## Why Recall Not Accuracy
 
-### Classification Performance (Final Models on Test Set)
+A model predicting "Not Defaulter" for everyone gets 81% accuracy but catches zero defaults. Recall minimises false negatives. All tuning optimised on Recall with AUC as secondary.
 
-| Model | Recall | Precision | Accuracy | F1 | ROC-AUC | Brier |
-|---|---|---|---|---|---|---|
-| Logistic Regression | 71.83% | 28.21% | 59.99% | 0.412 | 70.06% | 0.2397 |
-| XGBoost | 71.15% | 27.77% | 59.43% | 0.407 | 69.60% | 0.2356 |
-| RF Full | 69.57% | 27.03% | 58.61% | 0.398 | 68.64% | 0.2380 |
-| RF Reduced | 72.32% | 26.44% | 56.59% | 0.398 | 68.47% | 0.2386 |
-| **Gradient Boosting** | 65.97% | **29.04%** | **62.98%** | 0.407 | 69.61% | **0.2212** |
+---
 
-**Final model selected: Gradient Boosting** — best probability
-calibration (Brier 0.2212), validated on 235,399 active loans.
+## Why Not SMOTE
 
-### Top Predictive Features (Consistent Across All Models)
+- Empirical: SMOTE + class_weight collapsed to 99.88% recall / 19.62% accuracy
+- Fundamental: SMOTE creates artificial interpolated points. Class weights upweight real defaulters — model learns genuine patterns
 
-1. **sub_grade** — 60–74% importance in tree models
-2. **bin_int_rate** — 10–35% importance
-3. **term** — 60-month loans default at 2× the rate of 36-month
-4. **bin_annual_inc** — higher income = lower default, monotonic
-5. **bin_dti** — independent signal, low multicollinearity
+---
 
-### Key Finding
+## Statistical Feature Selection
 
-> All five models from three ML paradigms converged to the same
-> performance ceiling (~70-72% recall, ~68-70% AUC). This confirms
-> the ceiling is in the **data signal** — Lending Club's own credit
-> assessment (grade, sub_grade, int_rate) is the primary default
-> driver, leaving limited room for additional discrimination through
-> model complexity alone.
+| Feature Type | Test | Rule |
+|---|---|---|
+| Categorical vs binary target | Chi-Square | p < 0.05 keep |
+| Numerical non-normal | Mann-Whitney | p < 0.05 keep |
+| Normality check | Anderson-Darling | A2 > critical = non-normal |
+
+All 7 numerical columns rejected normality. application_type failed Chi-Square (p=1.0) and was dropped.
+
+---
+
+## SHAP Summary
+
+| Feature | GBM SHAP | LR SHAP | Agreement |
+|---|---|---|---|
+| sub_grade | 0.19 (1st) | 0.19 (3rd) | Both top 3 |
+| bin_annual_inc | 0.06 (2nd) | 0.21 (2nd) | Both top 3 |
+| bin_int_rate | 0.04 (5th) | 0.18 (4th) | Both top 5 |
+| bin_dti | 0.05 (3rd) | 0.16 (5th) | Both top 6 |
+| term | 0.05 (4th) | 0.14 (6th) | Both top 6 |
+| total_acc_bin | 0.00 | ~0.00 | Both confirm useless |
+
+---
+
+## Dataset
+
+- **Source:** Lending Club — [Kaggle](https://www.kaggle.com/datasets/wordsforthewise/lending-club)
+- **Period:** 2007-2014 (spans 2008 financial crisis)
+- **Raw:** 466,285 rows x 75 columns
+- **Cleaned:** 230,288 resolved loans x 55 features
+- Raw CSV files not included — download from Kaggle
 
 ---
 
@@ -165,58 +163,32 @@ calibration (Brier 0.2212), validated on 235,399 active loans.
 | Category | Tools |
 |---|---|
 | Language | Python 3.x |
-| Data Processing | pandas, numpy |
+| Data processing | pandas, numpy |
 | Visualisation | matplotlib, seaborn |
-| Statistical Tests | scipy, statsmodels |
-| ML Models | scikit-learn, xgboost |
-| Imbalance Handling | class_weight, scale_pos_weight, compute_sample_weight |
+| Statistical tests | scipy, statsmodels |
+| ML models | scikit-learn, xgboost |
 | Explainability | shap |
-| Reports | LaTeX, python-docx |
 
 ---
 
 ## How to Run
 
-**1 — Clone the repository**
 ```bash
-git clone https://github.com/yourusername/credit-risk-explainable-ml.git
+git clone https://github.com/YOUR_USERNAME/credit-risk-explainable-ml.git
 cd credit-risk-explainable-ml
-```
-
-**2 — Install dependencies**
-```bash
 pip install -r requirements.txt
-```
-
-**3 — Download the raw data**
-Download `loan_data_2007_2014.csv` from Kaggle and place it in a
-local `Datasets/` folder (not tracked by git).
-
-**4 — Run notebooks in order**
-```
-Phase1_Data_Cleaning/Data_cleaning.ipynb
-Phase2_EDA/eda.ipynb
-Phase3_Modelling/modelling_preprocessing.ipynb
-Phase3_Modelling/modelling_training.ipynb
-Phase4_Model_Evaluation/final_model_evaluation.ipynb
-Phase5_Explainability/xai_shap.ipynb
+# Download data from Kaggle, place in Datasets/
+# Run notebooks in phase order 1 through 5
 ```
 
 ---
 
-## Academic Context
+## Future Work
 
-This project was developed as part of an academic data science
-programme. It demonstrates:
-
-- End-to-end ML pipeline from raw data to explainable deployment
-- Statistical rigour in feature selection — every feature justified
-  with a formal hypothesis test (Chi-Square, Mann-Whitney, Anderson-Darling)
-- Multi-criteria model evaluation — calibration, threshold optimization,
-  agreement analysis, and statistical significance testing
-- Business-oriented design — recall-first objective, probability
-  calibration for risk scoring, regulatory explainability via SHAP
+- **Survival Analysis** — Kaplan-Meier and Cox PH for time-to-default
+- **Macro Stress Testing** — Monte Carlo simulation under adverse conditions
+- **Model monitoring** — SHAP value drift as retraining signal
 
 ---
 
-*Master README will be finalised after Phase 5 (Explainability) is complete.*
+*Academic data science project demonstrating end-to-end ML pipeline, statistical feature selection, multi-criteria model evaluation, and regulatory-grade explainability.*
