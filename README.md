@@ -1,3 +1,5 @@
+# Explainable Credit Risk Model using Machine Learning in Corporate Banking
+
 > **Predicting loan default on 230,288 Lending Club loans (2007–2014) using four ML models across three paradigms, with SHAP-based explainability for regulatory compliance.**
 
 ---
