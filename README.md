@@ -137,6 +137,27 @@ All 7 numerical columns rejected normality. application_type failed Chi-Square (
 
 ---
 
+## Statistical Methods & Tests Applied
+
+| Test / Method | Phase | Purpose |
+|---|---|---|
+| **Chi-Square Test** | Phase 3 | Association between categorical features and binary target (loan_status). Tests whether default rate distribution differs across categories |
+| **Anderson-Darling Test** | Phase 3 | Checks normality of numerical columns before deciding T-Test vs Mann-Whitney |
+| **Mann-Whitney U Test** | Phase 3 | Non-parametric association test for numerical features vs binary target — used because all 7 numerical columns rejected normality |
+| **T-Test (Independent)** | Phase 3 | Parametric alternative to Mann-Whitney — would be used if normality held. Mathematically equivalent to one-way ANOVA for two groups |
+| **Z-Test** | Phase 2 | Confirmed DTI difference between defaulters and non-defaulters is statistically significant across all loan purpose subgroups |
+| **Youden's J Statistic** | Phase 4 | Optimal threshold selection from ROC curve — maximises TPR - FPR |
+| **Brier Score** | Phase 4 | Calibration metric — mean squared error between predicted probability and actual outcome. Lower = more trustworthy probabilities |
+| **McNemar's Test** | Phase 4 | Pairwise significance testing between models — confirms model differences are statistically real, not random chance |
+| **ROC-AUC** | Phase 3 & 4 | Threshold-independent discrimination ability — area under the True Positive Rate vs False Positive Rate curve |
+| **F-beta Score (β=1.5)** | Phase 3 | Attempted balanced metric weighting recall 1.5× more than precision during hyperparameter tuning |
+| **Mutual Information (SelectKBest)** | Phase 3 | Feature selection inside pipeline — ranks features by mutual information with target, selects top k |
+| **SHAP (Shapley Values)** | Phase 5 | Feature attribution — mathematically rigorous explanation of each feature's contribution to individual predictions |
+| **Precision-Recall Curve** | Phase 4 | Threshold optimization via F1 maximization — more appropriate than ROC for imbalanced datasets |
+| **Monotonicity Check** | Phase 4 | Business validation on 235,399 active loans — confirms predicted default probability increases as payment delay worsens |
+
+---
+
 ## SHAP Summary
 
 | Feature | GBM SHAP | LR SHAP | Agreement |
