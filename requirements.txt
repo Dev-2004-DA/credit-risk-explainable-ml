@@ -1,0 +1,12 @@
+numpy
+pandas
+scipy
+scikit-learn
+xgboost
+matplotlib
+seaborn
+statsmodels
+lifelines
+shap
+jupyter
+notebook
