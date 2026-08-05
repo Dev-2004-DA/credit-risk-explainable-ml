@@ -245,6 +245,21 @@ All delivered through a **Streamlit dashboard** combining all 6 phases into a si
 
 ---
 
+## Future Work
+
+Future enhancements will extend the project into a complete **Credit Risk Analytics Framework** by developing:
+
+- **Exposure at Default (EAD):** Estimate the outstanding loan amount at the time of default.
+- **Loss Given Default (LGD):** Estimate the percentage of exposure that is expected to be lost after default.
+
+These models will be integrated with the existing **Probability of Default (PD)** models to estimate the **Expected Credit Loss (ECL)** using:
+
+`ECL = PD × LGD × EAD`
+
+This extension will provide an end-to-end credit risk solution aligned with industry practices for credit risk assessment and expected loss estimation.
+
+---
+
 ## How to Run
 
 ```bash
