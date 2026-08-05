@@ -273,4 +273,4 @@ pip install -r requirements.txt
 
 ---
 
-*Academic data science project demonstrating end-to-end ML pipeline, statistical feature selection, multi-criteria model evaluation, survival analysis, and regulatory-grade explainability across 6 phases.*
+*Data science project demonstrating end-to-end ML pipeline, statistical feature selection, multi-criteria model evaluation, survival analysis, and regulatory-grade explainability across 6 phases.*
