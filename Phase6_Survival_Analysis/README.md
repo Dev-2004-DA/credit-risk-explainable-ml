@@ -138,6 +138,7 @@ all models into a single interface:
 - Returns Cox and XGBoost survival risk scores
 - Displays SHAP waterfall plot for individual explanation
 - Shows survival curve for the borrower's risk profile
+- Link: https://credit-risk-survival-004.streamlit.app/
 
 ---
 
