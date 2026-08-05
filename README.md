@@ -1,26 +1,9 @@
-# Explainable Credit Risk & Survival Analysis Model in Corporate Banking
+# Explainable Credit Risk Model using Machine Learning in Corporate Banking
 
 > **Predicting loan default on 230,288 Lending Club loans (2007–2014) — binary classification, survival analysis, SHAP explainability, and a unified Streamlit dashboard across 6 phases.**
 
 ---
 
-## Project Executive Summary
-
-The 2008 financial crisis catalyzed a paradigm shift under Basel III and IFRS 9, pushing financial institutions away from backward-looking incurred-loss models toward forward-looking, lifetime Expected Credit Loss frameworks:
-
-$$ECL = PD \times LGD \times EAD$$
-
-In consumer and corporate lending, machine learning pipelines face severe economic cost asymmetries: failing to identify a true defaulter (a False Negative) destroys the entire principal, whereas rejecting a creditworthy applicant (a False Positive) only sacrifices interest margin. Standard accuracy metrics are deeply misleading on highly imbalanced credit data (an 81:19 class split).
-
-This project builds an enterprise-grade analytics pipeline that:
-- Prioritizes **Recall** as the core optimization target
-- Uses non-parametric statistical tests for feature selection
-- Rejects invalid synthetic oversampling in favor of native cost-sensitive learning
-- Benchmarks models across six evaluation dimensions
-- Secures regulatory transparency through SHAP-based explainability
-- Extends into temporal time-to-default survival analysis
-
----
 ## Project Summary
 
 Banks face an asymmetric cost problem in credit risk — missing a real defaulter costs the entire loan principal, while incorrectly rejecting a good borrower costs one customer. Standard ML optimises for accuracy, which is misleading on imbalanced data (81% non-defaulter). This project builds a complete, production-oriented credit risk framework across two core research questions:
@@ -275,4 +258,4 @@ pip install -r requirements.txt
 
 ---
 
-*data science project demonstrating end-to-end ML pipeline, statistical feature selection, multi-criteria model evaluation, survival analysis, and regulatory-grade explainability across 6 phases.*
+*Academic data science project demonstrating end-to-end ML pipeline, statistical feature selection, multi-criteria model evaluation, survival analysis, and regulatory-grade explainability across 6 phases.*
